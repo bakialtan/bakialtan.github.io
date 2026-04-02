@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>bakialtan — Blockchain Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#050A14;
+  --surface:#0C1525;
+  --surface2:#111D30;
+  --border:#1A2D4A;
+  --accent:#0066FF;
+  --accent2:#00CFFF;
+  --text:#E8EEF8;
+  --muted:#6B83A0;
+  --mono:'Space Mono',monospace;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(12px);background:rgba(5,10,20,0.85);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{font-family:var(--mono);font-size:15px;color:var(--accent);letter-spacing:2px;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:1px;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 2rem 60px;}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.3;}
+.glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,102,255,0.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);}
+.hero-inner{max-width:800px;text-align:center;position:relative;}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,102,255,0.1);border:1px solid rgba(0,102,255,0.3);border-radius:20px;padding:6px 16px;font-size:12px;color:var(--accent2);font-family:var(--mono);letter-spacing:1px;margin-bottom:2rem;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+h1{font-size:clamp(2.5rem,6vw,5rem);font-weight:300;line-height:1.1;letter-spacing:-2px;margin-bottom:1.5rem;}
+h1 span{color:var(--accent);}
+.hero-desc{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:560px;margin:0 auto 2.5rem;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn{padding:12px 28px;border-radius:6px;font-size:14px;font-family:var(--mono);text-decoration:none;transition:all .2s;letter-spacing:1px;}
+.btn-primary{background:var(--accent);color:#fff;border:1px solid var(--accent);}
+.btn-primary:hover{background:transparent;color:var(--accent);}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+/* SECTIONS */
+section{padding:100px 2rem;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-label{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;}
+.section-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;letter-spacing:-1px;margin-bottom:3rem;}
+
+/* ABOUT */
+#about{background:var(--surface);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.about-text p{color:var(--muted);line-height:1.9;font-size:15px;margin-bottom:1.2rem;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.code-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.code-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;gap:6px;align-items:center;}
+.dot{width:10px;height:10px;border-radius:50%;}
+.dot.r{background:#FF5F57;}
+.dot.y{background:#FFBD2E;}
+.dot.g{background:#28C840;}
+.code-body{padding:20px;font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--muted);}
+.code-body .k{color:#C792EA;}
+.code-body .s{color:#C3E88D;}
+.code-body .v{color:var(--accent2);}
+.code-body .c{color:#546E7A;font-style:italic;}
+.code-body .p{color:var(--text);}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:border-color .2s;}
+.skill-card:hover{border-color:var(--accent);}
+.skill-icon{font-size:22px;margin-bottom:12px;}
+.skill-name{font-family:var(--mono);font-size:13px;color:var(--text);margin-bottom:6px;}
+.skill-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ARC */
+#arc{background:var(--surface);}
+.arc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.arc-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.5rem;position:relative;overflow:hidden;}
+.arc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.arc-card h3{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:10px;letter-spacing:1px;}
+.arc-card p{font-size:13px;color:var(--muted);line-height:1.7;}
+.arc-card .value{font-size:22px;font-weight:300;color:var(--text);margin:8px 0 4px;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.8rem;transition:transform .2s,border-color .2s;}
+.project-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+.project-tag{display:inline-block;background:rgba(0,102,255,0.1);border:1px solid rgba(0,102,255,0.3);color:var(--accent);font-size:10px;font-family:var(--mono);padding:3px 10px;border-radius:4px;letter-spacing:1px;margin-bottom:1rem;}
+.project-card h3{font-size:16px;font-weight:500;margin-bottom:8px;}
+.project-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;}
+.project-footer{display:flex;gap:8px;flex-wrap:wrap;}
+.tech-badge{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:10px;font-family:var(--mono);padding:3px 8px;border-radius:4px;}
+
+/* CONTACT */
+#contact{background:var(--surface);text-align:center;}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;}
+.contact-link{display:flex;align-items:center;gap:8px;padding:12px 24px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:13px;font-family:var(--mono);transition:all .2s;}
+.contact-link:hover{border-color:var(--accent);color:var(--accent);}
+
+/* FOOTER */
+footer{padding:2rem;text-align:center;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px;}
+
+@media(max-width:768px){
+  .about-grid,.arc-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">bakialtan</div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#arc">arc network</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
+  <div class="hero-inner">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Building on Arc Network
+    </div>
+    <h1>Blockchain<br/><span>Developer</span></h1>
+    <p class="hero-desc">
+      Smart contract geliştirici. EVM uyumlu zincirler üzerinde stablecoin altyapısı, DeFi protokolleri ve onchain AI agent sistemleri inşa ediyorum.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">Projelerim</a>
+      <a href="#contact" class="btn btn-ghost">İletişim</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">// 01 — About</div>
+        <h2 class="section-title">Hakkımda</h2>
+        <div class="about-text">
+          <p>Blockchain ekosisteminde <strong>orta seviye bir geliştirici</strong> olarak EVM uyumlu zincirlerde çalışıyorum. Özellikle <strong>Arc Network</strong> üzerinde gerçek dünya finans altyapısı inşa etmeye odaklanıyorum.</p>
+          <p>Smart contract güvenliği, stablecoin ödemeleri ve cross-chain köprü sistemleri üzerine yoğunlaşıyorum. Aynı zamanda <strong>ERC-8183</strong> standardıyla AI agent entegrasyonlarını keşfediyorum.</p>
+          <p>Konya, Türkiye'den dünyaya açılan onchain ekonominin bir parçasıyım.</p>
+        </div>
+      </div>
+      <div class="code-card">
+        <div class="code-header">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        </div>
+        <div class="code-body">
+<span class="k">const</span> <span class="p">developer</span> <span class="p">=</span> {<br/>
+&nbsp;&nbsp;<span class="v">name</span><span class="p">:</span> <span class="s">"bakialtan"</span><span class="p">,</span><br/>
+&nbsp;&nbsp;<span class="v">role</span><span class="p">:</span> <span class="s">"Blockchain Developer"</span><span class="p">,</span><br/>
+&nbsp;&nbsp;<span class="v">chain</span><span class="p">:</span> <span class="s">"Arc Network"</span><span class="p">,</span><br/>
+&nbsp;&nbsp;<span class="v">level</span><span class="p">:</span> <span class="s">"mid-level"</span><span class="p">,</span><br/>
+&nbsp;&nbsp;<span class="v">focus</span><span class="p">: [</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"Smart Contracts"</span><span class="p">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"Stablecoin Payments"</span><span class="p">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">"AI Agents (ERC-8183)"</span><br/>
+&nbsp;&nbsp;<span class="p">],</span><br/>
+&nbsp;&nbsp;<span class="v">location</span><span class="p">:</span> <span class="s">"Konya, Turkey 🇹🇷"</span><span class="p">,</span><br/>
+&nbsp;&nbsp;<span class="v">status</span><span class="p">:</span> <span class="s">"open to collaborate"</span><br/>
+<span class="p">}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">// 02 — Skills</div>
+    <h2 class="section-title">Teknolojiler</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">📝</div>
+        <div class="skill-name">Solidity</div>
+        <div class="skill-desc">ERC-20, ERC-721, ERC-8183 smart contract geliştirme ve audit</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">TypeScript / JS</div>
+        <div class="skill-desc">ethers.js, viem ile frontend & script entegrasyonları</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔨</div>
+        <div class="skill-name">Hardhat / Foundry</div>
+        <div class="skill-desc">Test, deploy ve contract geliştirme ortamı</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌉</div>
+        <div class="skill-name">Circle CCTP</div>
+        <div class="skill-desc">Cross-chain USDC transferleri ve multichain köprü sistemleri</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⛓</div>
+        <div class="skill-name">EVM / Arc Network</div>
+        <div class="skill-desc">Arc L1 üzerinde deploy, gas optimizasyonu ve onchain finans</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">AI Agents</div>
+        <div class="skill-desc">ERC-8183 ile onchain AI agent kayıt ve iş akışı sistemleri</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="arc">
+  <div class="section-inner">
+    <div class="section-label">// 03 — Arc Network</div>
+    <h2 class="section-title">Neden Arc?</h2>
+    <div class="arc-grid">
+      <div class="arc-card">
+        <h3>⚡ Finality</h3>
+        <div class="value">Sub-second</div>
+        <p>Deterministic finality — işlemler anında kesinleşir, blok reorg riski yok.</p>
+      </div>
+      <div class="arc-card">
+        <h3>💵 Gas Token</h3>
+        <div class="value">USDC</div>
+        <p>Fiat-native stablecoin gas. Ücretler öngörülebilir, volatilite sıfır.</p>
+      </div>
+      <div class="arc-card">
+        <h3>🔵 Compatibility</h3>
+        <div class="value">Full EVM</div>
+        <p>Mevcut Solidity tooling'i ile çalışır. Migration gerektirmez.</p>
+      </div>
+      <div class="arc-card">
+        <h3>🤖 AI Native</h3>
+        <div class="value">ERC-8183</div>
+        <p>Onchain AI agent standardı. Machine-to-machine ödemeler ve intent matching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">// 04 — Projects</div>
+    <h2 class="section-title">Projeler</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-tag">ARC NETWORK</div>
+        <h3>Stablecoin Payment Gateway</h3>
+        <p>Arc Network üzerinde USDC ile çalışan işletmelere yönelik ödeme altyapısı. Düşük fee, anında settlement.</p>
+        <div class="project-footer">
+          <span class="tech-badge">Solidity</span>
+          <span class="tech-badge">USDC</span>
+          <span class="tech-badge">Arc L1</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">CROSS-CHAIN</div>
+        <h3>CCTP Bridge Integration</h3>
+        <p>Circle CCTP kullanarak farklı EVM zincirleri arasında USDC köprüsü. Multichain likidite yönetimi.</p>
+        <div class="project-footer">
+          <span class="tech-badge">ethers.js</span>
+          <span class="tech-badge">Circle CCTP</span>
+          <span class="tech-badge">TypeScript</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">AI AGENTS</div>
+        <h3>ERC-8183 Agent Registry</h3>
+        <p>Onchain AI agent kayıt sistemi. Agentlar iş ilanı açar, eşleşir ve otomatik ödeme alır.</p>
+        <div class="project-footer">
+          <span class="tech-badge">Solidity</span>
+          <span class="tech-badge">ERC-8183</span>
+          <span class="tech-badge">Hardhat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">// 05 — Contact</div>
+    <h2 class="section-title">İletişim</h2>
+    <p style="color:var(--muted);font-size:15px;max-width:500px;margin:0 auto 2rem;line-height:1.8;">Arc Network üzerinde bir şey inşa ediyorsanız ya da blockchain projelerinde iş birliği arıyorsanız ulaşın.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="https://github.com/bakialtan" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        github.com/bakialtan
+      </a>
+      <a class="contact-link" href="https://community.arc.network" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Arc Community
+      </a>
+      <a class="contact-link" href="https://docs.arc.network" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Arc Docs
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>bakialtan © 2025 — Building on Arc Network · Konya, Turkey</span>
+</footer>
+
+</body>
+</html>
